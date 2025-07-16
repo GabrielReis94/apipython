@@ -41,6 +41,17 @@ jobs:
       # - name: Push da imagem para DockerHub
       #   run: docker push customer-records-app:latest
 
-      # Exemplo de deploy (ajuste conforme seu ambiente)
-      # - name: Deploy (ajuste para seu servidor ou serviço)
-      #   run: echo "Adicione aqui o comando de deploy"
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy via SSH no WSL
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.WSL_HOST }}
+          username: ${{ secrets.WSL_USER }}
+          key: ${{ secrets.WSL_SSH_KEY }}
+          script: |
+            cd /home/${{ secrets.WSL_USER }}/customer-records-app01
+            git pull origin main
+            docker-compose up -d --build
