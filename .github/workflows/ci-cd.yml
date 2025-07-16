@@ -1,0 +1,46 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.9'
+
+      - name: Instalar dependências
+        run: |
+          pip install -r src/requirements.txt
+
+      - name: Rodar testes (adicione seus testes aqui)
+        run: |
+          echo "Nenhum teste implementado ainda"
+          # pytest ou outro comando de teste
+
+      - name: Build da imagem Docker
+        run: docker build -t customer-records-app:latest .
+
+      # Exemplo de push para DockerHub (opcional)
+      # - name: Login no DockerHub
+      #   uses: docker/login-action@v3
+      #   with:
+      #     username: ${{ secrets.DOCKERHUB_USERNAME }}
+      #     password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      # - name: Push da imagem para DockerHub
+      #   run: docker push customer-records-app:latest
+
+      # Exemplo de deploy (ajuste conforme seu ambiente)
+      # - name: Deploy (ajuste para seu servidor ou serviço)
+      #   run: echo "Adicione aqui o comando de deploy"

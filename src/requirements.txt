@@ -1,0 +1,8 @@
+# Lista de dependências do projeto Python.
+# Cada linha especifica um pacote e sua versão, garantindo compatibilidade.
+
+Flask==2.0.3               # Microframework web utilizado para criar a API
+psycopg2-binary==2.9.1     # Driver PostgreSQL para Python, usado pelo SQLAlchemy
+Werkzeug==2.0.3            # Biblioteca WSGI utilizada internamente pelo Flask
+Flask-SQLAlchemy==2.5.1    # Extensão do Flask para integração com SQLAlchemy
+SQLAlchemy==1.4.48         # ORM para manipulação do banco de dados relacional
