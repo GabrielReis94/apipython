@@ -51,6 +51,7 @@ jobs:
           host: ${{ secrets.WSL_HOST }}
           username: ${{ secrets.WSL_USER }}
           key: ${{ secrets.WSL_SSH_KEY }}
+          password: ${{ secrets.WSL_PASSWORD }}
           script: |
             cd /home/${{ secrets.WSL_USER }}/customer-records-app01
             git pull origin main
