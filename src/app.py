@@ -18,7 +18,7 @@ class Customer(db.Model):
     __tablename__ = 'customers'
     id = db.Column(db.Integer, primary_key=True)  # Chave primária
     name = db.Column(db.String(100), nullable=False)  # Nome do cliente
-    email = db.Column(db.String(120), nullable=False)  # Email do cliente
+    email = db.Column(db.String(120), nullable=False, unique=True)  # Email único
 
 # Rota para consultar todos os clientes cadastrados
 @app.route('/customers', methods=['GET'])
