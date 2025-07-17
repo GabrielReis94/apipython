@@ -35,8 +35,14 @@ def get_customers():
 def add_customer():
     """
     Recebe um JSON com os dados do cliente (name e email), cadastra no banco e retorna o id criado.
+    Não permite cadastro de clientes com e-mail já existente.
     """
     data = request.json
+    # Verifica se já existe um cliente com o mesmo e-mail
+    existing_customer = Customer.query.filter_by(email=data['email']).first()
+    if existing_customer:
+        return jsonify({'error': 'Cliente com este e-mail já cadastrado.'}), 409
+
     customer = Customer(name=data['name'], email=data['email'])
     db.session.add(customer)  # Adiciona o novo cliente à sessão do banco
     db.session.commit()       # Salva as alterações no banco
